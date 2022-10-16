@@ -6,6 +6,9 @@ import { collection, onSnapshot, addDoc, doc, deleteDoc} from 'firebase/firestor
 const Formulario = () => {
     const [fruta, setFruta] = useState('');
     const [descripcion, setDescripcion] = useState('');
+    const [peso, setPeso] = useState('');
+    const [cantidadPaquete, setCantidad] = useState('');
+    const [empresaNombre, setempresaNombre] = useState('');
     const [listaFrutas, setListaFrutas] = useState([])
     
 
@@ -43,16 +46,27 @@ const Formulario = () => {
             const data = await addDoc(collection(db,'frutas'),{
                 
                 nombreFruta: fruta,
-                nombreDescripcion: descripcion
+                nombreDescripcion: descripcion,
+                frutaPeso: peso,
+                cantidadContenido: cantidadPaquete,
+                empresaExportadora: empresaNombre 
             })
 
             setListaFrutas([
                 ...listaFrutas,
-                {nombreFruta:fruta, nombreDescripcion:descripcion, id:data.id}
+                {   nombreFruta:fruta, 
+                    nombreDescripcion:descripcion, 
+                    frutaPeso:peso,
+                    cantidadContenido:cantidadPaquete,
+                    empresaExportadora: empresaNombre,
+                    id:data.id}
             ])
 
             setFruta('')
             setDescripcion('')
+            setCantidad('')
+            setPeso('')
+            setempresaNombre('')
             e.target.reset()
         }catch(error){
             console.log(error)
@@ -70,7 +84,7 @@ const Formulario = () => {
                     {
                         listaFrutas.map(item =>(
                             <li className='list-group-item' key={item.id}>
-                                <span className='lead'>{item.nombreFruta}-{item.nombreDescripcion}</span>
+                                <span className='lead'>{item.nombreFruta}-{item.nombreDescripcion}-{item.cantidadContenido}-{item.frutaPeso}-{item.empresaExportadora}</span>
                                 <button className='btn btn-danger btn-sm float-end mx-2' onClick={()=>eliminar(item.id)}>Eliminar</button>
                             </li>
                         ))
@@ -96,6 +110,24 @@ const Formulario = () => {
                 placeholder='Ingrese Descripción'
                 onChange={(e) => setDescripcion(e.target.value)}
                 value = {descripcion}></input>
+                <input 
+                className='form-control mb-2'
+                type="text" 
+                placeholder='Ingrese cantidad por unidades'
+                onChange={(e) => setCantidad(e.target.value)}
+                value = {cantidadPaquete}></input>
+                <input 
+                className='form-control mb-2'
+                type="text" 
+                placeholder='Ingrese peso en gramos'
+                onChange={(e) => setPeso(e.target.value)}
+                value = {peso}></input>
+                <input 
+                className='form-control mb-2'
+                type="text" 
+                placeholder='Ingrese nombre empresa exportadora'
+                onChange={(e) => setempresaNombre(e.target.value)}
+                value = {empresaNombre}></input>
                 <button 
                 className='btn btn-primary btn-block'
                 type='submit'
