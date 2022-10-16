@@ -7,6 +7,7 @@ const Formulario = () => {
     const [fruta, setFruta] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [listaFrutas, setListaFrutas] = useState([])
+    
 
 
     useEffect(() => {
@@ -18,7 +19,8 @@ const Formulario = () => {
             });
           } catch (error) {
             console.log(error);
-          }
+          } 
+
         };
         obtenerDatos();
       }, []);
@@ -33,6 +35,7 @@ const Formulario = () => {
         }
     }
     const guardarFrutas = async (e) =>{
+
         e.preventDefault()
         try{
        
