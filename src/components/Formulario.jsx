@@ -18,7 +18,7 @@ const formulario = () => {
             type='text'
             placeholder='Ingrese Descripción'
             ></input>
-            <button>Agregar</button>
+            <button className='btn btn-primary btn-block'>Agregar</button>
         </form>
         </hr>
         

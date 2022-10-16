@@ -1,9 +1,9 @@
-import formulario from './components/formulario.jsx'
+import formulario from './components/Formulario.jsx'
 
 function App() {
   return (
     <div className="App">
-      <formulario/>
+      <Formulario/>
     </div>
   );
 }
